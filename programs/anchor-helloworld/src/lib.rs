@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
+declare_id!("D1oA4g1uwn6QE24GxpsLixa5UaMn3oRNqUa4d91Qu7ru");
 
 #[program]
 pub mod anchor_helloworld {
@@ -23,8 +23,12 @@ pub mod anchor_helloworld {
 
 #[derive(Accounts)]
 pub struct Create<'info> {
+    #[account(init, payer = user, space = 16 + 16)]
+    pub base_account: Account<'info, BaseAccount>,
     #[account(mut)]
-    pub base_account: Account<'info, BaseAccount>
+    pub user: Signer<'info>,
+    pub system_program: Program<'info, System>
+
 }
 
 #[derive(Accounts)]
